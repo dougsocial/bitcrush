@@ -170,9 +170,22 @@
     }
 
     /* Santinhas slideshow: never crop */
-    #projects .manifesto-visual img {
+    #projects .manifesto-visual {
+      position: relative;
+    }
+
+    #projects .manifesto-visual .santinhas-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
+      opacity: 0;
       transition: opacity 1s ease;
+    }
+
+    #projects .manifesto-visual .santinhas-img.active {
+      opacity: 1;
     }
 
     .image-credit {
@@ -272,7 +285,8 @@
     </div>
     <div class="manifesto-divider"></div>
     <div class="manifesto-visual">
-      <img id="santinhas-slideshow" src="santinhas/santinhas1.png" alt="Santinhas Populares visual" />
+      <img class="santinhas-img active" src="santinhas/santinhas1.png" alt="Santinhas Populares visual" />
+      <img class="santinhas-img" src="santinhas/santinhas2.png" alt="Santinhas Populares visual" />
     </div>
   </div>
 </section>
@@ -325,26 +339,32 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 sections.forEach(section => observer.observe(section));
-// Santinhas slideshow (1–9), random order, 3s each, smooth fade
-const santinhasImg = document.getElementById('santinhas-slideshow');
-if (santinhasImg) {
-  const santinhas = Array.from({ length: 9 }, (_, i) => `santinhas/santinhas${i + 1}.png`);
-  let current = 0;
+// Santinhas slideshow (1–9), preload + crossfade (no black frames)
+const santinhasImgs = document.querySelectorAll('.santinhas-img');
+if (santinhasImgs.length) {
+  const sources = Array.from({ length: 9 }, (_, i) => `santinhas/santinhas${i + 1}.png`);
+
+  // preload
+  sources.forEach(src => { const img = new Image(); img.src = src; });
 
   const shuffle = arr => arr.sort(() => Math.random() - 0.5);
-  let playlist = shuffle([...santinhas]);
+  let playlist = shuffle([...sources]);
+  let index = 0;
+  let active = 0;
 
   setInterval(() => {
-    santinhasImg.style.opacity = 0;
-    setTimeout(() => {
-      current = (current + 1) % playlist.length;
-      if (current === 0) playlist = shuffle([...santinhas]);
-      santinhasImg.src = playlist[current];
-      santinhasImg.style.opacity = 1;
-    }, 1000);
+    index = (index + 1) % playlist.length;
+    if (index === 0) playlist = shuffle([...sources]);
+
+    const next = 1 - active;
+    santinhasImgs[next].src = playlist[index];
+
+    santinhasImgs[active].classList.remove('active');
+    santinhasImgs[next].classList.add('active');
+
+    active = next;
   }, 3000);
 }
-
 </script>
 </body>
 </html>
