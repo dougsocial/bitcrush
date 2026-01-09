@@ -169,10 +169,7 @@
       object-fit: cover;
     }
 
-    /* Santinhas slideshow: never crop */
-    #projects .manifesto-visual {
-      position: relative;
-    }
+    #projects .manifesto-visual { position: relative; }
 
     #projects .manifesto-visual .santinhas-img {
       position: absolute;
@@ -184,9 +181,7 @@
       transition: opacity 1s ease;
     }
 
-    #projects .manifesto-visual .santinhas-img.active {
-      opacity: 1;
-    }
+    #projects .manifesto-visual .santinhas-img.active { opacity: 1; }
 
     .image-credit {
       position: absolute;
@@ -206,6 +201,7 @@
 <header id="site-header">
   <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">BITCRUSH</div>
   <nav class="nav">
+    <a href="#" id="lang-toggle" style="margin-right:1.5rem; font-size:0.7rem; letter-spacing:0.18em; color:var(--gray-text); text-decoration:none;">PT</a>
     <a href="#manifesto">MANIFESTO</a>
     <a href="#ideas">iDEAS</a>
     <a href="#projects">PROJECTS</a>
@@ -225,15 +221,15 @@
       <span class="word">A&nbsp;</span>
       <span class="word">STUDIO</span>
     </div>
-    <div class="subtitle">DIGITAL / A.I.gency | art, culture, and critical thinking</div>
+    <div class="subtitle" data-i18n="home_subtitle">DIGITAL / A.I.gency | art, culture, and critical thinking</div>
   </div>
 </section>
 
 <section id="manifesto">
   <div class="manifesto-wrapper">
     <div class="manifesto-text">
-      <div class="manifesto-title">WE PUT GREAT MINDS TOGETHER.</div>
-      <div class="manifesto-text-inner">
+      <div class="manifesto-title" data-i18n="manifesto_title">WE PUT GREAT MINDS TOGETHER.</div>
+      <div class="manifesto-text-inner" data-i18n-group="manifesto_body">
         <p><strong>BITCRUSH exists because ideas deserve more than factories.</strong></p>
         <p>We put great minds together.</p>
         <p>We are creativity-driven and people-oriented. Artificial intelligence is a tool we choose to master, before it turns against us.</p>
@@ -259,8 +255,8 @@
     </div>
     <div class="manifesto-divider"></div>
     <div class="manifesto-text">
-      <div class="manifesto-title">iDEAS</div>
-      <div class="manifesto-text-inner">
+      <div class="manifesto-title" data-i18n="ideas_title">iDEAS</div>
+      <div class="manifesto-text-inner" data-i18n-group="ideas_body">
         <p><strong>Ideas don’t appear out of nowhere.</strong> They are cultivated.</p>
         <p>At BITCRUSH, every project begins with an idea that is questioned, expanded, and refined before it is ever produced. We don’t chase trends or outputs. We design processes.</p>
         <p>Artificial intelligence is part of this process, but never the author. Tools respond to direction. Results depend on how clearly you guide them, how critically you curate them, and how much attention you give to every decision along the way.</p>
@@ -274,8 +270,8 @@
 <section id="projects">
   <div class="manifesto-wrapper">
     <div class="manifesto-text">
-      <div class="manifesto-title">SANTINHAS POPULARES</div>
-      <div class="manifesto-text-inner">
+      <div class="manifesto-title" data-i18n="projects_title">SANTINHAS POPULARES</div>
+      <div class="manifesto-text-inner" data-i18n-group="projects_body">
         <p><strong>SANTINHAS POPULARES</strong> is a cultural project rooted in popular tradition and collective memory.</p>
         <p>What to expect is not a single object, but a process: images, narratives, and artifacts that evolve into products, gifts, and shared experiences.</p>
         <p>Santinhas Populares is not a product. It is a process, a language, and a celebration.</p>
@@ -339,6 +335,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 sections.forEach(section => observer.observe(section));
+
 // Santinhas slideshow (1–9), preload + crossfade (no black frames)
 const santinhasImgs = document.querySelectorAll('.santinhas-img');
 if (santinhasImgs.length) {
@@ -365,6 +362,64 @@ if (santinhasImgs.length) {
     active = next;
   }, 3000);
 }
+// --- i18n layer (no reload, no layout change) ---
+const LANG = {
+  en: {
+    home_subtitle: 'DIGITAL / A.I.gency | art, culture, and critical thinking',
+    manifesto_title: 'WE PUT GREAT MINDS TOGETHER.',
+    manifesto_body: document.querySelector('#manifesto .manifesto-text-inner').innerHTML,
+    ideas_title: 'iDEAS',
+    ideas_body: document.querySelector('#ideas .manifesto-text-inner').innerHTML,
+    projects_title: 'SANTINHAS POPULARES',
+    projects_body: document.querySelector('#projects .manifesto-text-inner').innerHTML
+  },
+  pt: {
+    home_subtitle: 'DIGITAL / A.I.gência | arte, cultura e pensamento crítico',
+    manifesto_title: 'JUNTAMOS GRANDES MENTES.',
+    manifesto_body: `
+      <p><strong>BITCRUSH existe porque ideias merecem mais do que fábricas.</strong></p>
+      <p>Juntamos grandes mentes.</p>
+      <p>Somos movidos pela criatividade e orientados por pessoas. A inteligência artificial é uma ferramenta que escolhemos dominar antes que ela se volte contra nós.</p>
+      <p>Existimos fora, entre, acima e além dos sistemas dominantes. Questionamos padrões e recusamos operar em escala industrial.</p>
+      <p>Não somos uma agência.<br/>Nem um estúdio.<br/>Nem um projeto.<br/><strong>Estamos a construir um legado.</strong></p>
+      <p>Designers, programadores, historiadores, cientistas sociais, artistas, tatuadores, estrategas.</p>
+      <p>De grandes eventos a espaços íntimos onde as vozes importam e as pessoas se reconectam longe dos ecrãs.</p>
+      <p><strong>Vamos consertar isto juntos.</strong></p>`,
+    ideas_title: 'IDEIAS',
+    ideas_body: `
+      <p><strong>As ideias não surgem do nada.</strong> Elas são cultivadas.</p>
+      <p>Na BITCRUSH, cada projeto começa com uma ideia que é questionada, expandida e refinada antes de ser produzida. Não perseguimos tendências nem outputs. Desenhamos processos.</p>
+      <p>A inteligência artificial faz parte deste processo, mas nunca é a autora. As ferramentas respondem à direção. Os resultados dependem da clareza com que as orientamos e da curadoria humana.</p>
+      <p>Prompts altamente qualificados não são atalhos. São estruturas que codificam intenção, contexto, ética e julgamento estético.</p>
+      <p>É assim que transformamos ideias em projetos: através de orientação cuidadosa, refinamento contínuo e curadoria humana.</p>
+      <p><em>Em breve:</em><br/><strong>Super Trunfo — Série de Edição Limitada.</strong></p>`,
+    projects_title: 'SANTINHAS POPULARES',
+    projects_body: `
+      <p><strong>SANTINHAS POPULARES</strong> é um projeto cultural enraizado na tradição popular e na memória coletiva.</p>
+      <p>O que se apresenta não é um objeto único, mas um processo: imagens, narrativas e artefactos que evoluem para produtos, ofertas e experiências partilhadas.</p>
+      <p>Santinhas Populares não é um produto. É um processo, uma linguagem e uma celebração.</p>
+      <p>O projeto desenvolve-se através de um processo criativo cuidadosamente guiado, onde a inteligência artificial é usada como ferramenta — nunca como autora.</p>
+      <p>O projeto culmina no Dia D — uma celebração de rua durante os Santos Populares.</p>`
+  }
+};
+
+let currentLang = 'en';
+const toggle = document.getElementById('lang-toggle');
+
+toggle.addEventListener('click', e => {
+  e.preventDefault();
+  currentLang = currentLang === 'en' ? 'pt' : 'en';
+  toggle.textContent = currentLang === 'en' ? 'PT' : 'EN';
+
+  document.querySelector('[data-i18n="home_subtitle"]').innerHTML = LANG[currentLang].home_subtitle;
+  document.querySelector('[data-i18n="manifesto_title"]').innerHTML = LANG[currentLang].manifesto_title;
+  document.querySelector('#manifesto .manifesto-text-inner').innerHTML = LANG[currentLang].manifesto_body;
+  document.querySelector('[data-i18n="ideas_title"]').innerHTML = LANG[currentLang].ideas_title;
+  document.querySelector('#ideas .manifesto-text-inner').innerHTML = LANG[currentLang].ideas_body;
+  document.querySelector('[data-i18n="projects_title"]').innerHTML = LANG[currentLang].projects_title;
+  document.querySelector('#projects .manifesto-text-inner').innerHTML = LANG[currentLang].projects_body;
+});
+
 </script>
 </body>
 </html>
