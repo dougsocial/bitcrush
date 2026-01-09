@@ -169,6 +169,12 @@
       object-fit: cover;
     }
 
+    /* Santinhas slideshow: never crop */
+    #projects .manifesto-visual img {
+      object-fit: contain;
+      transition: opacity 1s ease;
+    }
+
     .image-credit {
       position: absolute;
       bottom: 0.8rem;
@@ -227,7 +233,7 @@
     </div>
     <div class="manifesto-divider"></div>
     <div class="manifesto-visual">
-      <img src="santinhas/santinhas1.png" alt="Manifesto visual" />
+      <img src="https://images.unsplash.com/photo-1767433137780-9a065fd295ab?q=80&w=3400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Manifesto visual" />
       <div class="image-credit">Wang Binghua</div>
     </div>
   </div>
@@ -266,7 +272,7 @@
     </div>
     <div class="manifesto-divider"></div>
     <div class="manifesto-visual">
-      <img src="santinhas/santinhas3.png" alt="Santinhas Populares visual" />
+      <img id="santinhas-slideshow" src="santinhas/santinhas1.png" alt="Santinhas Populares visual" />
     </div>
   </div>
 </section>
@@ -319,6 +325,26 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 sections.forEach(section => observer.observe(section));
+// Santinhas slideshow (1–9), random order, 3s each, smooth fade
+const santinhasImg = document.getElementById('santinhas-slideshow');
+if (santinhasImg) {
+  const santinhas = Array.from({ length: 9 }, (_, i) => `santinhas/santinhas${i + 1}.png`);
+  let current = 0;
+
+  const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+  let playlist = shuffle([...santinhas]);
+
+  setInterval(() => {
+    santinhasImg.style.opacity = 0;
+    setTimeout(() => {
+      current = (current + 1) % playlist.length;
+      if (current === 0) playlist = shuffle([...santinhas]);
+      santinhasImg.src = playlist[current];
+      santinhasImg.style.opacity = 1;
+    }, 1000);
+  }, 3000);
+}
+
 </script>
 </body>
 </html>
