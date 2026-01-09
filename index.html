@@ -4,189 +4,188 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BITCRUSH</title>
-
   <style>
     :root {
-      --black:#000;
-      --white:#fff;
-      --gray-1:#1a1a1a;
-      --gray-2:#262626;
-      --gray-3:#333;
-      --gray-text:#d0d0d0;
+      --black: #000000;
+      --white: #ffffff;
+      --gray-1: #1a1a1a;
+      --gray-2: #262626;
+      --gray-3: #333333;
+      --gray-text: #d0d0d0;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html,body{
-      width:100%;
-      height:100%;
-      background:var(--black);
-      color:var(--white);
-      font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
-      scroll-behavior:smooth;
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      scroll-behavior: smooth;
     }
 
-    body{overflow-y:scroll;}
+    body { overflow-y: scroll; }
 
-    section{
-      width:100%;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
+    section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    /* ---------- HEADER ---------- */
-    header{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      padding:1.5rem 2rem;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .6s ease;
-      z-index:10;
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease, color 0.6s ease;
+      background: transparent;
+      z-index: 10;
     }
 
-    .logo{
-      font-size:.9rem;
-      letter-spacing:.18em;
-      font-weight:500;
-      cursor:pointer;
+    .logo {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      cursor: pointer;
     }
 
-    .nav a{
-      margin-left:1.2rem;
-      font-size:.7rem;
-      letter-spacing:.18em;
-      color:var(--gray-text);
-      text-decoration:none;
-      transition:color .3s ease;
+    .nav a {
+      margin-left: 1.2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--gray-text);
+      text-decoration: none;
     }
 
-    .nav a.active{color:var(--white);}
+    .nav a.active { color: var(--white); }
 
-    /* ---------- SECTIONS COLORS ---------- */
-    #home{background:var(--black);}
-    #manifesto{background:var(--gray-1);}
-    #ideas{background:var(--gray-2);}
-    #projects{background:var(--black);}
-    #about{background:var(--gray-2);}
-    #contact{background:var(--gray-1);}
+    #home { background: var(--black); }
+    #manifesto { background: var(--gray-1); }
+    #ideas { background: var(--gray-2); }
+    #projects { background: var(--black); }
+    #about { background: var(--gray-2); }
+    #contact { background: var(--gray-1); }
 
-    /* ---------- HOME ---------- */
-    .container{text-align:center;padding:2rem;}
+    .container { padding: 2rem; text-align: center; }
 
-    .title{
-      font-size:clamp(2.2rem,6vw,4.5rem);
-      font-weight:600;
-      white-space:nowrap;
+    .title {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
     }
 
-    .word{
-      opacity:0;
-      display:inline-block;
-      animation:reveal .6s ease forwards;
+    .word {
+      opacity: 0;
+      display: inline-block;
+      animation: reveal 0.6s ease forwards;
+      animation-delay: var(--delay);
     }
 
-    .word:nth-child(1){animation-delay:1.2s}
-    .word:nth-child(2){animation-delay:1.8s}
-    .word:nth-child(3){animation-delay:2.4s}
-    .word:nth-child(4){animation-delay:3s}
-    .word:nth-child(5){animation-delay:3.6s}
-    .word:nth-child(6){animation-delay:4.2s}
-    .word:nth-child(7){animation-delay:4.8s}
+    .word:nth-child(1) { --delay: 1.2s; }
+    .word:nth-child(2) { --delay: 1.8s; }
+    .word:nth-child(3) { --delay: 2.4s; }
+    .word:nth-child(4) { --delay: 3.0s; }
+    .word:nth-child(5) { --delay: 3.6s; }
+    .word:nth-child(6) { --delay: 4.2s; }
+    .word:nth-child(7) { --delay: 4.8s; }
 
-    @keyframes reveal{
-      from{opacity:0;transform:translateY(10px)}
-      to{opacity:1;transform:translateY(0)}
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .subtitle{
-      opacity:0;
-      animation:reveal .6s ease forwards;
-      animation-delay:5.8s;
-      margin-top:1.2rem;
-      font-size:.8rem;
-      letter-spacing:.18em;
-      color:var(--gray-text);
+    .subtitle {
+      opacity: 0;
+      animation: reveal 0.6s ease forwards;
+      animation-delay: 5.8s;
+      margin-top: 1.2rem;
+      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--gray-text);
     }
 
-    /* ---------- MANIFESTO SYSTEM ---------- */
-    .manifesto-wrapper{
-      display:grid;
-      grid-template-columns:minmax(320px,1fr) auto minmax(320px,.9fr);
-      gap:3rem;
-      max-width:1200px;
-      height:78vh;
-      padding:4rem;
+    .manifesto-wrapper {
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) auto minmax(320px, 0.9fr);
+      gap: 3rem;
+      max-width: 1200px;
+      height: 78vh;
+      padding: 4rem;
+      align-items: stretch;
     }
 
-    .manifesto-text{
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-      color:var(--gray-text);
-      line-height:1.85;
-      font-size:1rem;
+    .manifesto-text {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--gray-text);
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .manifesto-title{
-      font-size:1.2rem;
-      font-weight:700;
-      letter-spacing:.06em;
-      margin-bottom:1.8rem;
+    .manifesto-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.8rem;
     }
 
-    .manifesto-text-inner{
-      flex:1;
-      overflow-y:auto;
-      scrollbar-width:none;
-      padding-right:1.5rem;
+    .manifesto-text-inner {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 1.5rem;
+      scrollbar-width: none;
     }
 
-    .manifesto-text-inner::-webkit-scrollbar{display:none;}
-    .manifesto-text-inner p{margin-bottom:1.2rem;}
+    .manifesto-text-inner::-webkit-scrollbar { display: none; }
+    .manifesto-text p { margin-bottom: 1.2rem; }
 
-    .manifesto-divider{
-      width:1px;
-      background:rgba(255,255,255,.15);
+    .manifesto-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.15);
     }
 
-    .manifesto-visual{
-      position:relative;
-      overflow:hidden;
+    .manifesto-visual {
+      position: relative;
+      overflow: hidden;
     }
 
-    .manifesto-visual img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .manifesto-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .image-credit{
-      position:absolute;
-      bottom:.8rem;
-      right:.8rem;
-      font-size:.6rem;
-      letter-spacing:.14em;
-      opacity:0;
-      transition:opacity .4s ease;
+    .image-credit {
+      position: absolute;
+      bottom: 0.8rem;
+      right: 0.8rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.8);
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
-    .manifesto-visual:hover .image-credit{opacity:1;}
+    .manifesto-visual:hover .image-credit { opacity: 1; }
   </style>
 </head>
-
 <body>
-
 <header id="site-header">
-  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">BITCRUSH</div>
+  <div class="logo" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">BITCRUSH</div>
   <nav class="nav">
     <a href="#manifesto">MANIFESTO</a>
     <a href="#ideas">iDEAS</a>
@@ -196,7 +195,6 @@
   </nav>
 </header>
 
-<!-- HOME -->
 <section id="home">
   <div class="container">
     <div class="title">
@@ -212,7 +210,6 @@
   </div>
 </section>
 
-<!-- MANIFESTO -->
 <section id="manifesto">
   <div class="manifesto-wrapper">
     <div class="manifesto-text">
@@ -220,102 +217,67 @@
       <div class="manifesto-text-inner">
         <p><strong>BITCRUSH exists because ideas deserve more than factories.</strong></p>
         <p>We put great minds together.</p>
-        <p>We are creativity-driven and people-oriented.</p>
-        <p>We are not an agency.<br>Not a studio.<br>Not a project.<br><strong>We are building a legacy.</strong></p>
+        <p>We are creativity-driven and people-oriented. Artificial intelligence is a tool we choose to master, before it turns against us.</p>
+        <p>We exist outside, between, above and beyond dominant systems. We question defaults and refuse to operate at industrial scale.</p>
+        <p>We are not an agency.<br/>Not a studio.<br/>Not a project.<br/><strong>We are building a legacy.</strong></p>
+        <p>Designers, programmers, historians, social scientists, artists, tattoo artists, strategists.</p>
+        <p>From large-scale events to intimate spaces where voices matter and people reconnect away from screens.</p>
+        <p><strong>We will fix it together.</strong></p>
       </div>
     </div>
     <div class="manifesto-divider"></div>
     <div class="manifesto-visual">
-      <img src="santinhas/santinhas1.png" alt="Manifesto visual">
+      <img src="santinhas/santinhas1.png" alt="Manifesto visual" />
       <div class="image-credit">Wang Binghua</div>
     </div>
   </div>
 </section>
 
-<!-- IDEAS -->
-<section id="ideas">
-  <div class="manifesto-wrapper">
-    <div class="manifesto-visual">
-      <img src="santinhas/santinhas2.png" alt="">
-    </div>
-    <div class="manifesto-divider"></div>
-    <div class="manifesto-text">
-      <div class="manifesto-title">iDEAS</div>
-      <div class="manifesto-text-inner">
-        <p><strong>Ideas don’t appear out of nowhere.</strong> They are cultivated.</p>
-        <p>We design processes. Tools follow direction.</p>
-        <p><em>Super Trunfo — Limited Edition Series.</em></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="manifesto-wrapper">
-    <div class="manifesto-text">
-      <div class="manifesto-title">SANTINHAS POPULARES</div>
-      <div class="manifesto-text-inner">
-        <p><strong>SANTINHAS POPULARES</strong> is a cultural project rooted in popular tradition.</p>
-        <p><em>Gallery coming soon.</em></p>
-      </div>
-    </div>
-    <div class="manifesto-divider"></div>
-    <div class="manifesto-visual">
-      <img src="santinhas/santinhas3.png" alt="">
-    </div>
-  </div>
-</section>
-
+<section id="ideas"></section>
+<section id="projects"></section>
 <section id="about"></section>
-
-<section id="contact">
-  <div class="container">
-    <a href="https://instagram.com/bitcrush.art" target="_blank" style="letter-spacing:.18em;color:white;text-decoration:none">
-      instagram.com/bitcrush.art
-    </a>
-  </div>
-</section>
+<section id="contact"></section>
 
 <script>
-/* hover scroll */
-const containers=document.querySelectorAll('.manifesto-text-inner');
-if(matchMedia('(pointer:fine)').matches){
-  containers.forEach(c=>{
-    let t=0,y=0;
-    c.addEventListener('mousemove',e=>{
-      const r=c.getBoundingClientRect();
-      const p=(e.clientY-r.top)/r.height;
-      t=p*(c.scrollHeight-r.height);
+const textContainers = document.querySelectorAll('.manifesto-text-inner');
+if (window.matchMedia('(pointer: fine)').matches) {
+  textContainers.forEach(container => {
+    let target = 0;
+    let current = 0;
+    container.addEventListener('mousemove', e => {
+      const rect = container.getBoundingClientRect();
+      const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+      const ratio = y / rect.height;
+      const max = container.scrollHeight - rect.height;
+      target = ratio * max;
     });
-    (function loop(){
-      y+=(t-y)*.08;
-      c.scrollTop=y;
-      requestAnimationFrame(loop);
-    })();
+    const tick = () => {
+      current += (target - current) * 0.08;
+      container.scrollTop = current;
+      requestAnimationFrame(tick);
+    };
+    tick();
   });
 }
 
-/* menu logic */
-const header=document.getElementById('site-header');
-const sections=document.querySelectorAll('section');
-const links=document.querySelectorAll('.nav a');
+const header = document.getElementById('site-header');
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav a');
 
-new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const id=e.target.id;
-      header.style.opacity=id==='home'?0:1;
-      header.style.pointerEvents=id==='home'?'none':'auto';
-      links.forEach(l=>{
-        l.classList.toggle('active',l.getAttribute('href')===`#${id}`);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      header.style.opacity = id === 'home' ? 0 : 1;
+      header.style.pointerEvents = id === 'home' ? 'none' : 'auto';
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
       });
     }
   });
-},{threshold:.6}).observe(sections[0]);
+}, { threshold: 0.6 });
 
-sections.forEach(s=>observer?.observe?.(s));
+sections.forEach(section => observer.observe(section));
 </script>
-
 </body>
 </html>
