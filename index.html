@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BITCRUSH</title>
+
+  <style>
+    :root {
+      --black:#000;
+      --white:#fff;
+      --gray-1:#1a1a1a;
+      --gray-2:#262626;
+      --gray-3:#333;
+      --gray-text:#d0d0d0;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    html,body{
+      width:100%;
+      height:100%;
+      background:var(--black);
+      color:var(--white);
+      font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{overflow-y:scroll;}
+
+    section{
+      width:100%;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    /* ---------- HEADER ---------- */
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      padding:1.5rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .6s ease;
+      z-index:10;
+    }
+
+    .logo{
+      font-size:.9rem;
+      letter-spacing:.18em;
+      font-weight:500;
+      cursor:pointer;
+    }
+
+    .nav a{
+      margin-left:1.2rem;
+      font-size:.7rem;
+      letter-spacing:.18em;
+      color:var(--gray-text);
+      text-decoration:none;
+      transition:color .3s ease;
+    }
+
+    .nav a.active{color:var(--white);}
+
+    /* ---------- SECTIONS COLORS ---------- */
+    #home{background:var(--black);}
+    #manifesto{background:var(--gray-1);}
+    #ideas{background:var(--gray-2);}
+    #projects{background:var(--black);}
+    #about{background:var(--gray-2);}
+    #contact{background:var(--gray-1);}
+
+    /* ---------- HOME ---------- */
+    .container{text-align:center;padding:2rem;}
+
+    .title{
+      font-size:clamp(2.2rem,6vw,4.5rem);
+      font-weight:600;
+      white-space:nowrap;
+    }
+
+    .word{
+      opacity:0;
+      display:inline-block;
+      animation:reveal .6s ease forwards;
+    }
+
+    .word:nth-child(1){animation-delay:1.2s}
+    .word:nth-child(2){animation-delay:1.8s}
+    .word:nth-child(3){animation-delay:2.4s}
+    .word:nth-child(4){animation-delay:3s}
+    .word:nth-child(5){animation-delay:3.6s}
+    .word:nth-child(6){animation-delay:4.2s}
+    .word:nth-child(7){animation-delay:4.8s}
+
+    @keyframes reveal{
+      from{opacity:0;transform:translateY(10px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .subtitle{
+      opacity:0;
+      animation:reveal .6s ease forwards;
+      animation-delay:5.8s;
+      margin-top:1.2rem;
+      font-size:.8rem;
+      letter-spacing:.18em;
+      color:var(--gray-text);
+    }
+
+    /* ---------- MANIFESTO SYSTEM ---------- */
+    .manifesto-wrapper{
+      display:grid;
+      grid-template-columns:minmax(320px,1fr) auto minmax(320px,.9fr);
+      gap:3rem;
+      max-width:1200px;
+      height:78vh;
+      padding:4rem;
+    }
+
+    .manifesto-text{
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      color:var(--gray-text);
+      line-height:1.85;
+      font-size:1rem;
+    }
+
+    .manifesto-title{
+      font-size:1.2rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      margin-bottom:1.8rem;
+    }
+
+    .manifesto-text-inner{
+      flex:1;
+      overflow-y:auto;
+      scrollbar-width:none;
+      padding-right:1.5rem;
+    }
+
+    .manifesto-text-inner::-webkit-scrollbar{display:none;}
+    .manifesto-text-inner p{margin-bottom:1.2rem;}
+
+    .manifesto-divider{
+      width:1px;
+      background:rgba(255,255,255,.15);
+    }
+
+    .manifesto-visual{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .manifesto-visual img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .image-credit{
+      position:absolute;
+      bottom:.8rem;
+      right:.8rem;
+      font-size:.6rem;
+      letter-spacing:.14em;
+      opacity:0;
+      transition:opacity .4s ease;
+    }
+
+    .manifesto-visual:hover .image-credit{opacity:1;}
+  </style>
+</head>
+
+<body>
+
+<header id="site-header">
+  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">BITCRUSH</div>
+  <nav class="nav">
+    <a href="#manifesto">MANIFESTO</a>
+    <a href="#ideas">iDEAS</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#about">ABOUT</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home">
+  <div class="container">
+    <div class="title">
+      <span class="word">BITCRUSH&nbsp;</span>
+      <span class="word">/&nbsp;</span>
+      <span class="word">THIS&nbsp;</span>
+      <span class="word">IS&nbsp;</span>
+      <span class="word">NOT&nbsp;</span>
+      <span class="word">A&nbsp;</span>
+      <span class="word">STUDIO</span>
+    </div>
+    <div class="subtitle">DIGITAL / A.I.gency | art, culture, and critical thinking</div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="manifesto-wrapper">
+    <div class="manifesto-text">
+      <div class="manifesto-title">WE PUT GREAT MINDS TOGETHER.</div>
+      <div class="manifesto-text-inner">
+        <p><strong>BITCRUSH exists because ideas deserve more than factories.</strong></p>
+        <p>We put great minds together.</p>
+        <p>We are creativity-driven and people-oriented.</p>
+        <p>We are not an agency.<br>Not a studio.<br>Not a project.<br><strong>We are building a legacy.</strong></p>
+      </div>
+    </div>
+    <div class="manifesto-divider"></div>
+    <div class="manifesto-visual">
+      <img src="santinhas/santinhas1.png" alt="Manifesto visual">
+      <div class="image-credit">Wang Binghua</div>
+    </div>
+  </div>
+</section>
+
+<!-- IDEAS -->
+<section id="ideas">
+  <div class="manifesto-wrapper">
+    <div class="manifesto-visual">
+      <img src="santinhas/santinhas2.png" alt="">
+    </div>
+    <div class="manifesto-divider"></div>
+    <div class="manifesto-text">
+      <div class="manifesto-title">iDEAS</div>
+      <div class="manifesto-text-inner">
+        <p><strong>Ideas don’t appear out of nowhere.</strong> They are cultivated.</p>
+        <p>We design processes. Tools follow direction.</p>
+        <p><em>Super Trunfo — Limited Edition Series.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="manifesto-wrapper">
+    <div class="manifesto-text">
+      <div class="manifesto-title">SANTINHAS POPULARES</div>
+      <div class="manifesto-text-inner">
+        <p><strong>SANTINHAS POPULARES</strong> is a cultural project rooted in popular tradition.</p>
+        <p><em>Gallery coming soon.</em></p>
+      </div>
+    </div>
+    <div class="manifesto-divider"></div>
+    <div class="manifesto-visual">
+      <img src="santinhas/santinhas3.png" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="about"></section>
+
+<section id="contact">
+  <div class="container">
+    <a href="https://instagram.com/bitcrush.art" target="_blank" style="letter-spacing:.18em;color:white;text-decoration:none">
+      instagram.com/bitcrush.art
+    </a>
+  </div>
+</section>
+
+<script>
+/* hover scroll */
+const containers=document.querySelectorAll('.manifesto-text-inner');
+if(matchMedia('(pointer:fine)').matches){
+  containers.forEach(c=>{
+    let t=0,y=0;
+    c.addEventListener('mousemove',e=>{
+      const r=c.getBoundingClientRect();
+      const p=(e.clientY-r.top)/r.height;
+      t=p*(c.scrollHeight-r.height);
+    });
+    (function loop(){
+      y+=(t-y)*.08;
+      c.scrollTop=y;
+      requestAnimationFrame(loop);
+    })();
+  });
+}
+
+/* menu logic */
+const header=document.getElementById('site-header');
+const sections=document.querySelectorAll('section');
+const links=document.querySelectorAll('.nav a');
+
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      header.style.opacity=id==='home'?0:1;
+      header.style.pointerEvents=id==='home'?'none':'auto';
+      links.forEach(l=>{
+        l.classList.toggle('active',l.getAttribute('href')===`#${id}`);
+      });
+    }
+  });
+},{threshold:.6}).observe(sections[0]);
+
+sections.forEach(s=>observer?.observe?.(s));
+</script>
+
+</body>
+</html>
